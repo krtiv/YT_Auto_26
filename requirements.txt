@@ -1,4 +1,9 @@
+# LLM providers: google-generativeai and groq are free-tier; anthropic is
+# paid and only needed if you set LLM_PROVIDER=anthropic in .env
+google-genai>=0.3.0
+groq>=0.11.0
 anthropic>=0.40.0
+
 edge-tts>=6.1.0
 moviepy>=2.0.0
 pillow>=10.0.0

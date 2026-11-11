@@ -13,6 +13,14 @@ CACHE_DIR = ROOT_DIR / "output" / "cache"
 for _dir in (DATA_DIR, OUTPUT_DIR, CACHE_DIR):
     _dir.mkdir(parents=True, exist_ok=True)
 
+LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "gemini")  # "gemini" | "groq" | "anthropic"
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5")
 

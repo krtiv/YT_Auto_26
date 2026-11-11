@@ -1,27 +1,69 @@
 import json
 import re
 
-from anthropic import Anthropic
-
 import config
 
-_client = None
+_clients = {}
 
 
-def _get_client() -> Anthropic:
-    global _client
-    if _client is None:
-        if not config.ANTHROPIC_API_KEY:
-            raise RuntimeError(
-                "ANTHROPIC_API_KEY is not set. Add it to your .env file."
-            )
-        _client = Anthropic(api_key=config.ANTHROPIC_API_KEY)
-    return _client
+def _get_gemini_client():
+    from google import genai
+
+    if not config.GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY is not set. Add it to your .env file.")
+    if "gemini" not in _clients:
+        _clients["gemini"] = genai.Client(api_key=config.GEMINI_API_KEY)
+    return _clients["gemini"]
 
 
-def complete(prompt: str, system: str = "", max_tokens: int = 2048) -> str:
-    """Send a single-turn prompt to Claude and return the text response."""
-    client = _get_client()
+def _get_groq_client():
+    from groq import Groq
+
+    if not config.GROQ_API_KEY:
+        raise RuntimeError("GROQ_API_KEY is not set. Add it to your .env file.")
+    if "groq" not in _clients:
+        _clients["groq"] = Groq(api_key=config.GROQ_API_KEY)
+    return _clients["groq"]
+
+
+def _get_anthropic_client():
+    from anthropic import Anthropic
+
+    if not config.ANTHROPIC_API_KEY:
+        raise RuntimeError("ANTHROPIC_API_KEY is not set. Add it to your .env file.")
+    if "anthropic" not in _clients:
+        _clients["anthropic"] = Anthropic(api_key=config.ANTHROPIC_API_KEY)
+    return _clients["anthropic"]
+
+
+def _complete_gemini(prompt: str, system: str, max_tokens: int) -> str:
+    from google.genai import types
+
+    client = _get_gemini_client()
+    response = client.models.generate_content(
+        model=config.GEMINI_MODEL,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=system or None, max_output_tokens=max_tokens
+        ),
+    )
+    return response.text
+
+
+def _complete_groq(prompt: str, system: str, max_tokens: int) -> str:
+    client = _get_groq_client()
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+    response = client.chat.completions.create(
+        model=config.GROQ_MODEL, messages=messages, max_tokens=max_tokens
+    )
+    return response.choices[0].message.content
+
+
+def _complete_anthropic(prompt: str, system: str, max_tokens: int) -> str:
+    client = _get_anthropic_client()
     response = client.messages.create(
         model=config.ANTHROPIC_MODEL,
         max_tokens=max_tokens,
@@ -29,6 +71,24 @@ def complete(prompt: str, system: str = "", max_tokens: int = 2048) -> str:
         messages=[{"role": "user", "content": prompt}],
     )
     return "".join(block.text for block in response.content if block.type == "text")
+
+
+_PROVIDERS = {
+    "gemini": _complete_gemini,
+    "groq": _complete_groq,
+    "anthropic": _complete_anthropic,
+}
+
+
+def complete(prompt: str, system: str = "", max_tokens: int = 2048) -> str:
+    """Send a single-turn prompt to the configured LLM provider (LLM_PROVIDER
+    in .env: "gemini", "groq", or "anthropic") and return the text response."""
+    provider = config.LLM_PROVIDER.lower()
+    if provider not in _PROVIDERS:
+        raise ValueError(
+            f"Unknown LLM_PROVIDER {provider!r}; expected one of {list(_PROVIDERS)}"
+        )
+    return _PROVIDERS[provider](prompt, system, max_tokens)
 
 
 def complete_json(prompt: str, system: str = "", max_tokens: int = 2048) -> dict:
