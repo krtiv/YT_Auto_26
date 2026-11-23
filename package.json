@@ -5,13 +5,16 @@
   "scripts": {
     "start": "remotion studio src/index.ts",
     "render:101": "remotion render src/index.ts Template101 out/template-101.mp4",
-    "still:101": "remotion still src/index.ts Template101 out/template-101-thumb.png"
+    "still:101": "remotion still src/index.ts Template101 out/template-101-thumb.png",
+    "render:202": "remotion render src/index.ts Template202 out/template-202.mp4",
+    "still:202": "remotion still src/index.ts Template202 out/template-202-thumb.png"
   },
   "dependencies": {
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "remotion": "4.0.290",
-    "@remotion/cli": "4.0.290"
+    "@remotion/cli": "4.0.290",
+    "@remotion/media-utils": "4.0.290"
   },
   "devDependencies": {
     "typescript": "5.6.3",
