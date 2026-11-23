@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { BRAND_CONFIG, Corner } from "./brandConfig";
 import { COLORS } from "./theme";
-import { BENGALI_FONT_FAMILY } from "./loadFont";
+import { BENGALI_FONT_FAMILY } from "../../shared/loadFont";
 
 // brandConfig.ts-এ যা কিছু show: true করা থাকবে, সেগুলোকে
 // ঠিক কোনায় বসানোর কাজটা এই ফাইল করে। সাধারণত এটা ছোঁয়ার দরকার নেই —

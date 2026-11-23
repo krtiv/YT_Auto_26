@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { COLORS } from "./theme";
-import { toBengaliDigits } from "./utils";
+import { toBengaliDigits } from "../../shared/utils";
 
 // প্রতিটা নাম্বার-পয়েন্টের শুরুতে বড় করে "১", "২"... দেখানোর অ্যানিমেশন।
 // এটা স্ক্রিনে কতক্ষণ থাকবে সেটা theme.ts-এর NUMBER_TRANSITION_FRAMES থেকে আসে।

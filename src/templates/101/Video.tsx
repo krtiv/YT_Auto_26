@@ -6,7 +6,7 @@ import { NumberTransition } from "./NumberTransition";
 import { ProgressBar } from "./ProgressBar";
 import { BrandOverlay } from "./BrandOverlay";
 import { COLORS, NUMBER_TRANSITION_FRAMES } from "./theme";
-import { BENGALI_FONT_FAMILY, fontCss } from "./loadFont";
+import { BENGALI_FONT_FAMILY, fontCss } from "../../shared/loadFont";
 
 // এই ফাইলটা "অ্যাসেম্বলার" — এটা content.ts-এর প্রতিটা স্লাইড
 // একটার পর একটা সময়মতো সাজিয়ে পুরো ভিডিওটা বানায়।

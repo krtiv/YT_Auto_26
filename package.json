@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts MainVideo out/video.mp4",
-    "still": "remotion still src/index.ts MainVideo out/thumb.png"
+    "render:101": "remotion render src/index.ts Template101 out/template-101.mp4",
+    "still:101": "remotion still src/index.ts Template101 out/template-101-thumb.png"
   },
   "dependencies": {
     "react": "19.0.0",

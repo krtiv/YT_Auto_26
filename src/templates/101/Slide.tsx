@@ -3,7 +3,7 @@ import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } fr
 import { COLORS, WORD_STAGGER_FRAMES } from "./theme";
 import { PatternBackground } from "./PatternBackground";
 import { Icon } from "./icons";
-import { toBengaliDigits } from "./utils";
+import { toBengaliDigits } from "../../shared/utils";
 import type { Slide as SlideType } from "./content";
 
 // একটা শব্দ কীভাবে স্ক্রিনে ভেসে উঠবে (ফেড-ইন + একটু নিচ থেকে উঠে আসা)
