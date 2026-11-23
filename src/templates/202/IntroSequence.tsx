@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { BRAND } from "./content";
 import { COLORS } from "./theme";
 
@@ -36,31 +36,50 @@ export const IntroSequence: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      <div style={{ opacity: contentOpacity, display: "flex", alignItems: "center", gap: 18 }}>
+      {BRAND.logoImage ? (
         <div
           style={{
-            width: 56,
-            height: 56,
-            borderRadius: 12,
-            backgroundColor: COLORS.accent,
+            opacity: contentOpacity,
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            fontSize: 24,
-            color: "#fff",
-            fontWeight: 800,
+            gap: 14,
           }}
         >
-          {">_"}
+          {BRAND.intro && (
+            <div style={{ fontSize: 15, letterSpacing: 3, color: COLORS.accent, fontWeight: 700 }}>
+              {BRAND.intro}
+            </div>
+          )}
+          <Img src={staticFile(BRAND.logoImage)} style={{ height: 140, width: "auto" }} />
         </div>
-        <div>
-          <div style={{ fontSize: 13, letterSpacing: 2, color: COLORS.accent, fontWeight: 700 }}>
-            {BRAND.intro}
+      ) : (
+        <div style={{ opacity: contentOpacity, display: "flex", alignItems: "center", gap: 18 }}>
+          <div
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 12,
+              backgroundColor: COLORS.accent,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 24,
+              color: "#fff",
+              fontWeight: 800,
+            }}
+          >
+            {">_"}
           </div>
-          <div style={{ fontSize: 34, color: COLORS.text, fontWeight: 800 }}>{BRAND.name}</div>
-          <div style={{ fontSize: 15, color: COLORS.mutedText }}>{BRAND.tagline}</div>
+          <div>
+            <div style={{ fontSize: 13, letterSpacing: 2, color: COLORS.accent, fontWeight: 700 }}>
+              {BRAND.intro}
+            </div>
+            <div style={{ fontSize: 34, color: COLORS.text, fontWeight: 800 }}>{BRAND.name}</div>
+            <div style={{ fontSize: 15, color: COLORS.mutedText }}>{BRAND.tagline}</div>
+          </div>
         </div>
-      </div>
+      )}
       <AbsoluteFill style={{ backgroundColor: COLORS.accent, opacity: flashOpacity }} />
     </AbsoluteFill>
   );
