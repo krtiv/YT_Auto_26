@@ -2,3 +2,6 @@ node_modules
 out
 .remotion
 *.log
+
+# আসল মানুষের ফুটেজ — অনুমতি ছাড়া GitHub-এ পুশ করা হবে না
+public/template-202-source.mp4
