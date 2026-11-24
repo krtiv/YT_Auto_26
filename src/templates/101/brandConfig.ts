@@ -21,14 +21,14 @@ export const BRAND_CONFIG = {
 
   // সোশ্যাল মিডিয়া হ্যান্ডেল (ফেসবুক/ইউটিউব/ইনস্টাগ্রাম পেজের নাম)
   socialHandle: {
-    show: true,
+    show: false,
     text: "@tumar_page",
     position: "bottom-right" as Corner,
   },
 
   // ওয়েবসাইট/কন্টাক্ট তথ্য
   contactInfo: {
-    show: true,
+    show: false,
     text: "www.example.com",
     position: "bottom-left" as Corner,
   },

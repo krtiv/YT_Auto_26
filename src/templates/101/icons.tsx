@@ -69,6 +69,45 @@ const Rocket: React.FC = () => (
   </svg>
 );
 
+const Book: React.FC = () => (
+  <svg viewBox="0 0 200 200" width="100%" height="100%">
+    <path
+      d="M100 60 C80 45 45 42 20 48 V165 C45 158 80 160 100 175 C120 160 155 158 180 165 V48 C155 42 120 45 100 60 Z"
+      {...strokeProps}
+    />
+    <path d="M100 60 V175" {...strokeProps} />
+    <path d="M132 44 V92 L144 80 L156 92 V44 Z" fill={COLORS.accent} />
+  </svg>
+);
+
+const Garden: React.FC = () => (
+  <svg viewBox="0 0 200 200" width="100%" height="100%">
+    <path d="M100 185 V105" {...strokeProps} />
+    <path d="M100 140 L75 118 M100 128 L126 108" {...strokeProps} />
+    <circle cx="100" cy="72" r="50" {...strokeProps} />
+    <path d="M45 185 H155" {...strokeProps} />
+    <circle cx="82" cy="62" r="9" fill={COLORS.accent} />
+    <circle cx="118" cy="80" r="9" fill={COLORS.accent} />
+    <circle cx="98" cy="96" r="7" fill={COLORS.accent} />
+  </svg>
+);
+
+const SunHalf: React.FC<{ arrow: "up" | "down" }> = ({ arrow }) => (
+  <svg viewBox="0 0 200 200" width="100%" height="100%">
+    <path d="M45 140 A55 55 0 0 1 155 140 Z" fill={COLORS.accent} />
+    <path d="M15 140 H185" {...strokeProps} />
+    <path d="M100 60 V72 M45 85 L54 93 M155 85 L146 93 M22 118 H34 M178 118 H166" {...strokeProps} />
+    {arrow === "up" ? (
+      <path d="M100 185 V160 M88 172 L100 160 L112 172" {...strokeProps} />
+    ) : (
+      <path d="M100 158 V183 M88 171 L100 183 L112 171" {...strokeProps} />
+    )}
+  </svg>
+);
+
+const Sunrise: React.FC = () => <SunHalf arrow="up" />;
+const Sunset: React.FC = () => <SunHalf arrow="down" />;
+
 const IconMap: Record<IconName, React.FC> = {
   clock: Clock,
   moon: Moon,
@@ -76,6 +115,10 @@ const IconMap: Record<IconName, React.FC> = {
   phone: Phone,
   stopwatch: Stopwatch,
   rocket: Rocket,
+  book: Book,
+  garden: Garden,
+  sunrise: Sunrise,
+  sunset: Sunset,
 };
 
 export const Icon: React.FC<{ name: IconName }> = ({ name }) => {
