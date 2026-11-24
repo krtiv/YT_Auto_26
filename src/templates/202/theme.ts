@@ -10,7 +10,3 @@ export const COLORS = {
 export const FPS = 30;
 export const WIDTH = 1280;
 export const HEIGHT = 720;
-
-// ভিডিও ছোট হয়ে পাশে সরার সময় কতক্ষণ ধরে (ফ্রেমে) সেটা স্মুথলি হবে —
-// সংখ্যাটা বাড়ালে আরও ধীর/স্মুথ, কমালে আরও দ্রুত/চটজলদি লাগবে।
-export const SHIFT_TRANSITION_FRAMES = 36;

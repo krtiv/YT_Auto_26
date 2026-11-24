@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
 import { VideoLayer } from "./VideoLayer";
-import { MomentOverlay } from "./MomentOverlay";
+import { Card } from "./Card";
 import { LiveBadge } from "./LiveBadge";
 import { LogoBadge } from "./LogoBadge";
 import { Outro } from "./Outro";
@@ -13,7 +13,7 @@ export const Template202Video: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.background }}>
       <VideoLayer />
-      <MomentOverlay />
+      <Card />
       <LiveBadge />
       <LogoBadge />
       <Outro />

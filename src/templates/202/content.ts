@@ -1,7 +1,9 @@
 // ================================================================
-// টেমপ্লেট ২০২ — টক-হেড ভিডিওর উপর হেডিং/গ্রাফিক ওভারলে স্টাইল।
-// এই ফাইলটাই এডিট করবে: তোমার ভিডিও ফাইলের নাম, ব্র্যান্ড/লোগো তথ্য,
-// আর কোন সেকেন্ডে কোন হেডিং/গ্রাফিক দেখাবে সেটা।
+// টেমপ্লেট ২০২ — টক-হেড ভিডিওর উপর একটা কার্ড ভেসে ওঠার স্টাইল।
+// ভিডিওটা পুরো সময় ফুল-স্ক্রিন থাকে (কখনো ছোট/সরে যায় না); একটা ছোট
+// কার্ড কোনায় ভেসে ওঠে, আর তার ভেতরে লাইন একটার পর একটা জমতে থাকে —
+// ঠিক রেফারেন্স ভিডিওর মতো।
+// এই ফাইলটাই এডিট করবে।
 // ================================================================
 
 // ১) তোমার আসল টক-হেড ভিডিওটা public/ ফোল্ডারে রেখে এখানে নাম বসাও
@@ -17,71 +19,83 @@ export const BRAND = {
   logoLabel: "AT", // logoImage খালি স্ট্রিং ("") করলে এই অক্ষর দিয়ে সাধারণ ব্যাজ দেখাবে
 };
 
-// ৩) প্রতিটা "মোমেন্ট" মানে ভিডিওর একটা নির্দিষ্ট সময়ে হেডিং/গ্রাফিক ভেসে ওঠা।
-//    startSeconds = ভিডিওর কত সেকেন্ডে এটা শুরু হবে (তোমার ভিডিওর অডিও/স্ক্রিপ্ট শুনে বসাও)
-//    side = ভিডিওটা কোন পাশে ছোট হয়ে সরে যাবে — হেডিং এমনিতেই উল্টো পাশে বসবে
-//    graphic = "none" | "tags" | "meter" | "diagram" (তিন রকম ছোট গ্রাফিক রেডি আছে)
+// একটা কার্ডের ভেতরে একটার পর একটা যে লাইনগুলো জমতে থাকে
+export type CardLine = {
+  text: string;
+  delaySeconds: number; // কার্ড/মোমেন্ট শুরুর কত সেকেন্ড পর এই লাইনটা ভেসে উঠবে
+  style?: "eyebrow" | "heading" | "muted" | "highlight";
+  // eyebrow = ছোট লাল ক্যাপশন লেবেল, heading = বড় বোল্ড সাদা লেখা,
+  // muted = ছোট ধূসর সাব-টেক্সট/কোট, highlight = লাল জোর দেওয়া লাইন
+};
+
 export type GraphicType = "none" | "tags" | "meter" | "diagram";
 
 export type Moment = {
   id: string;
-  startSeconds: number;
-  durationSeconds: number;
-  eyebrow?: string; // হেডিং-এর উপরে ছোট লাল লেবেল (ঐচ্ছিক)
-  heading: string;
-  subheading?: string; // হেডিং-এর নিচে ছোট ধূসর লাইন (ঐচ্ছিক)
-  side: "left" | "right";
-  graphic?: GraphicType;
+  startSeconds: number; // ভিডিওর কত সেকেন্ডে কার্ডটা আসা শুরু হবে
+  durationSeconds: number; // কার্ডটা মোট কতক্ষণ স্ক্রিনে থাকবে
+  position: "top-left" | "top-right"; // কার্ডটা কোন কোনায় বসবে
+  lines: CardLine[];
+  graphic?: GraphicType; // "none" | "tags" | "meter" | "diagram"
+  graphicDelaySeconds?: number; // গ্রাফিকটা কার্ড শুরুর কত সেকেন্ড পর আসবে
   tags?: string[]; // graphic: "tags" হলে এগুলো একটার পর একটা দেখাবে
   meterValue?: number; // graphic: "meter" হলে ০-১০০ এর মধ্যে মান
+  stampText?: string; // যেমন "IMPOSSIBLE" — কার্ডের উপর তেরছা স্ট্যাম্প
+  stampDelaySeconds?: number;
 };
 
 // ================================================================
 // ⚠️ খসড়া (DRAFT) — অটো-ট্রান্সক্রিপশন অনির্ভরযোগ্য হওয়ায় এই হেডিংগুলো
-// নিশ্চিত না, শুধু আন্দাজ। heading-এর জায়গায় সঠিক লেখা বসাও, subheading-এ
-// যা অডিওতে ধরা পড়েছে তার (ভাঙা) ইঙ্গিত রাখা আছে রেফারেন্সের জন্য —
-// ভিডিওটা একবার দেখে/শুনে এগুলো ঠিক করে দাও। যেটুকু একদমই বোঝা যায়নি
-// (৪৭ সেকেন্ডের পর থেকে প্রায় পুরোটাই) সেখানে কোনো মোমেন্ট রাখিনি।
+// নিশ্চিত না, শুধু আন্দাজ। প্রতিটা লাইনের text বদলে আসল কথাটা বসাও,
+// delaySeconds/startSeconds গুলো ভিডিও দেখে মিলিয়ে ঠিক করো।
 // ================================================================
 export const MOMENTS: Moment[] = [
   {
     id: "m1",
     startSeconds: 0.5,
     durationSeconds: 7,
-    eyebrow: "খসড়া",
-    heading: "অভিযাত্রিক",
-    subheading: "(আসসালামু আলাইকুম, আলহামদুলিল্লাহ... অভিযাত্রিক)",
-    side: "left",
+    position: "top-left",
+    lines: [
+      { text: "শুরুতে", delaySeconds: 0, style: "eyebrow" },
+      { text: "আসসালামু আলাইকুম", delaySeconds: 0.3, style: "heading" },
+      { text: "(আলহামদুলিল্লাহ... অভিযাত্রিক)", delaySeconds: 2, style: "muted" },
+    ],
     graphic: "none",
   },
   {
     id: "m2",
     startSeconds: 8,
     durationSeconds: 8,
-    eyebrow: "খসড়া",
-    heading: "একটি প্রজেক্ট",
-    subheading: "(FSP Project... P209 — নাম/সংখ্যাটা নিশ্চিত না)",
-    side: "right",
+    position: "top-right",
+    lines: [
+      { text: "প্রজেক্ট", delaySeconds: 0, style: "eyebrow" },
+      { text: "একটি প্রজেক্ট", delaySeconds: 0.3, style: "heading" },
+      { text: "(FSP Project... P209 — নাম/সংখ্যা নিশ্চিত না)", delaySeconds: 2.5, style: "muted" },
+    ],
     graphic: "none",
   },
   {
     id: "m3",
     startSeconds: 17,
     durationSeconds: 7,
-    eyebrow: "খসড়া",
-    heading: "অপারেশন প্রসঙ্গে",
-    subheading: "(...Operation, Bangladesh... Kora Shambohut Shilana)",
-    side: "left",
+    position: "top-left",
+    lines: [
+      { text: "প্রসঙ্গ", delaySeconds: 0, style: "eyebrow" },
+      { text: "অপারেশন প্রসঙ্গে", delaySeconds: 0.3, style: "heading" },
+      { text: "(...Operation, Bangladesh... Kora Shambohut Shilana)", delaySeconds: 2.5, style: "muted" },
+    ],
     graphic: "none",
   },
   {
     id: "m4",
     startSeconds: 39,
     durationSeconds: 8,
-    eyebrow: "খসড়া",
-    heading: "অপারেশনের প্রয়োজন",
-    subheading: "(...operation... আলহামদুলিল্লাহ)",
-    side: "right",
+    position: "top-right",
+    lines: [
+      { text: "প্রয়োজন", delaySeconds: 0, style: "eyebrow" },
+      { text: "অপারেশনের প্রয়োজন", delaySeconds: 0.3, style: "heading" },
+      { text: "(...operation... আলহামদুলিল্লাহ)", delaySeconds: 2.5, style: "muted" },
+    ],
     graphic: "none",
   },
 ];
