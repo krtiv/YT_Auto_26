@@ -5,6 +5,7 @@ import { Slide } from "./Slide";
 import { NumberTransition } from "./NumberTransition";
 import { ProgressBar } from "./ProgressBar";
 import { BrandOverlay } from "./BrandOverlay";
+import { SoundDesign } from "./SoundDesign";
 import { COLORS, NUMBER_TRANSITION_FRAMES } from "./theme";
 import { TEXT_FONT_STACK, fontCss } from "../../shared/loadFont";
 
@@ -60,6 +61,7 @@ export const MainVideo: React.FC = () => {
       </Series>
       <ProgressBar />
       <BrandOverlay />
+      <SoundDesign />
     </AbsoluteFill>
   );
 };

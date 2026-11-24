@@ -12,7 +12,7 @@ const isPunctuation = (text: string) => /^[।,:;!?.]+$/.test(text.trim());
 // সাধারণ (হাইলাইট ছাড়া) লেখাকে আলাদা আলাদা শব্দে ভাগ করা হচ্ছে, যাতে
 // শব্দগুলো একটা একটা করে আসে আর লম্বা লাইন দরকার হলে নিজে থেকে ভেঙে যায়।
 // হাইলাইট করা অংশ একসাথে এক বক্সেই থাকে।
-const splitLine = (line: WordType[]): WordType[] =>
+export const splitLine = (line: WordType[]): WordType[] =>
   line.flatMap((word) =>
     word.highlight
       ? [word]
