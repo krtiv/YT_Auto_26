@@ -5,8 +5,7 @@
 // ================================================================
 
 // ১) তোমার আসল টক-হেড ভিডিওটা public/ ফোল্ডারে রেখে এখানে নাম বসাও
-//    (এখন একটা placeholder/স্যাম্পল ফুটেজ বসানো আছে টেস্ট করার জন্য)
-export const VIDEO_SOURCE = "sample-footage.mp4";
+export const VIDEO_SOURCE = "template-202-source.mp4";
 
 // ২) ইন্ট্রোতে আর কোনায় যে লোগো/নাম দেখাবে
 export const BRAND = {
@@ -37,47 +36,55 @@ export type Moment = {
   meterValue?: number; // graphic: "meter" হলে ০-১০০ এর মধ্যে মান
 };
 
+// ================================================================
+// ⚠️ খসড়া (DRAFT) — অটো-ট্রান্সক্রিপশন অনির্ভরযোগ্য হওয়ায় এই হেডিংগুলো
+// নিশ্চিত না, শুধু আন্দাজ। heading-এর জায়গায় সঠিক লেখা বসাও, subheading-এ
+// যা অডিওতে ধরা পড়েছে তার (ভাঙা) ইঙ্গিত রাখা আছে রেফারেন্সের জন্য —
+// ভিডিওটা একবার দেখে/শুনে এগুলো ঠিক করে দাও। যেটুকু একদমই বোঝা যায়নি
+// (৪৭ সেকেন্ডের পর থেকে প্রায় পুরোটাই) সেখানে কোনো মোমেন্ট রাখিনি।
+// ================================================================
 export const MOMENTS: Moment[] = [
   {
     id: "m1",
-    startSeconds: 2,
-    durationSeconds: 4,
-    eyebrow: "THE TOPIC",
-    heading: "Video editing with AI",
+    startSeconds: 0.5,
+    durationSeconds: 7,
+    eyebrow: "খসড়া",
+    heading: "অভিযাত্রিক",
+    subheading: "(আসসালামু আলাইকুম, আলহামদুলিল্লাহ... অভিযাত্রিক)",
     side: "left",
     graphic: "none",
   },
   {
     id: "m2",
-    startSeconds: 9,
-    durationSeconds: 5,
-    eyebrow: "THE REAL QUESTION",
-    heading: "Afraid AI will take your job?",
+    startSeconds: 8,
+    durationSeconds: 8,
+    eyebrow: "খসড়া",
+    heading: "একটি প্রজেক্ট",
+    subheading: "(FSP Project... P209 — নাম/সংখ্যাটা নিশ্চিত না)",
     side: "right",
-    graphic: "diagram",
+    graphic: "none",
   },
   {
     id: "m3",
     startSeconds: 17,
     durationSeconds: 7,
-    eyebrow: "THE NEXT FEW MONTHS",
-    heading: "A one-person team",
-    subheading: "Learn · Build · Record · Edit · Ship",
+    eyebrow: "খসড়া",
+    heading: "অপারেশন প্রসঙ্গে",
+    subheading: "(...Operation, Bangladesh... Kora Shambohut Shilana)",
     side: "left",
-    graphic: "tags",
-    tags: ["Learn", "Build", "Record", "Edit", "Ship"],
+    graphic: "none",
   },
   {
     id: "m4",
-    startSeconds: 25,
-    durationSeconds: 4,
-    eyebrow: "PROGRESS",
-    heading: "Halfway through the course",
+    startSeconds: 39,
+    durationSeconds: 8,
+    eyebrow: "খসড়া",
+    heading: "অপারেশনের প্রয়োজন",
+    subheading: "(...operation... আলহামদুলিল্লাহ)",
     side: "right",
-    graphic: "meter",
-    meterValue: 52,
+    graphic: "none",
   },
 ];
 
-// ৪) ভিডিওর একদম শেষে যে ক্লোজিং লাইনটা দেখাবে
-export const OUTRO_TEXT = "Stay well. Take care.";
+// ৪) ভিডিওর একদম শেষে যে ক্লোজিং লাইনটা দেখাবে (এটাও খসড়া, কনফার্ম করো)
+export const OUTRO_TEXT = "ধন্যবাদ।";
