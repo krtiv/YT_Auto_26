@@ -3,7 +3,7 @@ import { Img, staticFile } from "remotion";
 import { BRAND } from "./content";
 import { COLORS } from "./theme";
 
-// নিচে-ডানে সবসময় থাকা লোগো ব্যাজ।
+// উপরে-ডানে সবসময় থাকা লোগো ব্যাজ।
 // content.ts-এ BRAND.logoImage একটা ছবির নাম থাকলে সেটা দেখাবে,
 // খালি স্ট্রিং থাকলে BRAND.logoLabel অক্ষর দিয়ে একটা সাধারণ ব্যাজ দেখাবে।
 export const LogoBadge: React.FC = () => {
@@ -13,7 +13,7 @@ export const LogoBadge: React.FC = () => {
         src={staticFile(BRAND.logoImage)}
         style={{
           position: "absolute",
-          bottom: 24,
+          top: 24,
           right: 24,
           height: 40,
           width: "auto",
@@ -26,7 +26,7 @@ export const LogoBadge: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        bottom: 24,
+        top: 24,
         right: 24,
         width: 32,
         height: 32,
